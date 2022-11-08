@@ -1,0 +1,57 @@
+﻿
+<header class="header">
+		<div class="header_container _container">
+			@if (ViewBag.Title != null)
+			{
+				<a href="" class="header_logo">
+					@ViewBag.Title
+				</a>
+			}
+			else {
+				<a href="" class="header_logo">
+					@*@Config.CompanyName*@
+				</a>
+			}
+
+
+				<div class="header">
+					<div class="header-container">
+							<a href="../sacriart.html" target="_blank" class="header_logo">
+								SacriShop
+							</a>
+
+							<div class="header-counter" onclick="headerPage.handlerOpenCart();"> 
+
+								<i class="fa-solid fa-basket-shopping fa-2x"></i>
+						
+							</div>
+					</div> 
+				</div>
+
+			@*<nav class="header_menu menu">
+				<ul id="menu" class="menu_list">
+					<li class="menu_item">
+						<a href="#about_us" class="menu_link">
+							Home
+						</a>
+					</li>
+					<li class="menu_item">
+						<a href="#exhibition" class="menu_link">
+							Exibition
+						</a>
+					</li>
+					<li class="menu_item">
+						<a href="#team" class="menu_link">
+							Our Team
+						</a>
+					</li>
+					<li class="menu_item">
+						<a href="~/sacrishop/sacrishop.html" target="_blank" class="menu_link"> href="@Url.Action("Shop","Home")"
+ 							Shop
+						</a>
+					</li>
+				</ul>
+			</nav>*@
+
+		</div> 
+</header>

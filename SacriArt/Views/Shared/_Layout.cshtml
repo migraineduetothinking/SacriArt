@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	
+	@await Html.PartialAsync("Parts/MetaPArtial")
+	@await Html.PartialAsync("Parts/CssPArtial")
+
+</head>
+
+
+
+<body>
+	<div class="wrapper">
+		@await Html.PartialAsync("Parts/HeaderPartial")
+
+
+		<main class="main-page">
+			
+			@RenderBody()
+
+		</main>
+
+
+		
+	   
+	   @await Html.PartialAsync("Parts/FooterPartial")
+
+	</div>
+
+	@await Html.PartialAsync("Parts/ScriptsPartial")
+	
+</body>
+</html>
