@@ -15,9 +15,8 @@ namespace SacriArt.Models.ShopModels
 
 
         //Relationships
-        public int PaintingId { get; set; }
-        [ForeignKey("PaintingId")]
-        public Painting Painting { get; set; }
+        
+        public List<Painting> Paintings { get; set; }
 
     }
 }

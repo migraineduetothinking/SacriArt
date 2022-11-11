@@ -15,18 +15,18 @@ namespace SacriArt.Models.ShopModels
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 chars")]
         public string Name { get; set; }
 
-        
-        [Display(Name = "Size")]
-        [Required(ErrorMessage = "Size is required")]
-        public string Size { get; set; }
-
         public int? Year { get; set; }
-
 
         [Display(Name = "Image")]
         [Required(ErrorMessage = "Image is required")]
         public string ImageUrl { get; set; }
 
+
+        [Display(Name = "Size")]
+        [Required(ErrorMessage = "Size is required")]
+        public string Size { get; set; }
+
+              
         [Display(Name = "Price")]
         [Required(ErrorMessage = "Price is required")]
         public double Price { get; set; }
