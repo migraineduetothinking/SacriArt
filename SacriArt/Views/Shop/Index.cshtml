@@ -1,0 +1,111 @@
+﻿@model IndexViewModel
+
+
+<style>
+    .glyphicon {
+        display: inline-block;
+        padding: 0 5px;
+    }
+
+    .glyphicon-chevron-right:after {
+        content: "\00BB";
+    }
+
+    .glyphicon-chevron-left:before {
+        content: "\00AB";
+    }
+</style>
+
+
+
+<p><a asp-controller="Shop" asp-action="Create" >Add Painting</a></p>
+
+@*<form method="get">
+    <label>Name: </label>
+    <input name="name" value="@Model.FilterViewModel.SelectedCategory" />
+
+    <label>Exhibition title: </label>
+    <select name="company" asp-items="Model.FilterViewModel.ExhibitionTitles"></select>
+
+    <label>Author: </label>
+    <select name="company" asp-items="Model.FilterViewModel.Authors"></select>
+
+    <label>Style: </label>
+    <select name="company" asp-items="Model.FilterViewModel.Styles"></select>
+
+    <input type="submit" value="Search" />
+</form>
+*@
+
+<tr>
+    
+    <th >
+        <a class="change_me_later" asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
+           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+           asp-route-category="@(Model.FilterViewModel.SelectedCategory)">Sort by Price</a>
+    </th>
+   
+    <th >
+        <a class="change_me_later"  asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+           asp-route-category="@(Model.FilterViewModel.SelectedCategory)">Sort by Name</a>
+    </th>
+</tr>
+
+
+<ul class="prod-container" ">
+    
+    @foreach (Painting painting in Model.Paintings)
+    {
+        <li class="prod-element">
+
+            <span class="prod-element__name">@painting.Name</span>
+            <span class="prod-element__year">@painting.Year</span>
+		    <img class="prod-element__img" src=" @painting.ImageUrl "/>
+		    <span class="prod-element__exh-title">@painting.ExhibitionTitle?.Name</span>
+            <span class="prod-element__author">@painting.Author?.FullName</span>
+            <span class="prod-element__style_size">@painting.Size, @painting.Style?.Name </span>
+		    <span >  &nbsp; </span>
+
+		    <div>
+		        <span class="prod-element__price">@painting.Price USD</span>
+		        @*<span class="prod-element__btn${activeClass}" onclick="prodPage.handlesetLS(this, '${id}');" > ${activeIcon}  </span>*@
+		    </div>
+				
+	    </li>
+        
+
+    }
+    
+
+</ul>
+
+<p>
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+           asp-route-sortorder="@(Model.SortViewModel.Current)"
+           class="glyphicon glyphicon-chevron-left">
+            Previous
+        </a>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+           asp-route-sortorder="@(Model.SortViewModel.Current)"
+           class="glyphicon glyphicon-chevron-right">
+            Next
+        </a>
+    }
+</p>
+
+
+<script>
+    $(".select option").each(function () {
+        $(this).siblings('[value="' + this.value + '"]').remove();
+    });
+</script>

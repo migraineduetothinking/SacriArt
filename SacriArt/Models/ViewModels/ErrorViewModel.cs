@@ -1,4 +1,6 @@
-namespace SacriArt.Models
+
+
+namespace SacriArt.Models.ViewModels
 {
     public class ErrorViewModel
     {

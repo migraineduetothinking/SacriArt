@@ -1,6 +1,4 @@
 
-
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SacriArt.Domain;
@@ -19,6 +17,8 @@ namespace SacriArt
             builder.Configuration.Bind("ConnectionStrings", new Config());
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Config.ConnectionString));
+
+            //builder.Services.AddScoped<IPaintingService, PaintingService>();
 
 
             //builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
@@ -46,7 +46,7 @@ namespace SacriArt
 
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Shop/Error");
                 
                 app.UseHsts();
             }
@@ -60,9 +60,9 @@ namespace SacriArt
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Shop}/{action=Index}/{id?}");
 
-            AppDbInitializer.Seed(app);
+            //AppDbInitializer.Seed(app);
 
             app.Run();
         }

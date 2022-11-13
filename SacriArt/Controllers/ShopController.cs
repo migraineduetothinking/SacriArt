@@ -1,28 +1,43 @@
-﻿using SacriArt.Models.ShopModels;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using SacriArt.Domain;
+using SacriArt.Models.ShopModels;
+using SacriArt.Models.ViewModels;
+using System.Diagnostics;
 
-namespace SacriArt.Domain
+namespace SacriArt.Controllers
 {
-    public class AppDbInitializer
+    public class ShopController : Controller
     {
+        AppDbContext db;
+        private readonly ILogger<ShopController> _logger;
 
-        public static void Seed(IApplicationBuilder applicationBuilder)
+        IWebHostEnvironment _appEnvironment;
+
+        //private readonly IPaintingService _paintService;
+
+        public ShopController(ILogger<ShopController> logger, AppDbContext context, IWebHostEnvironment appEnvironment)
         {
-            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope()) {
+            _logger = logger;
+            db = context;
+            _appEnvironment = appEnvironment;
+            //_paintService = paintService;
 
-                var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+            db.Database.EnsureCreated();
 
-                context.Database.EnsureCreated();
-
-                //Authors
-                if (!context.Authors.Any())
-                {
-                    context.Authors.AddRange(new List<Author>()
-                    {   
+            //Authors
+            if (!db.Authors.Any())
+            {
+                db.Authors.AddRange(new List<Author>()
+                    {
 
                         new Author()
                         {
                             FullName = "All",
-                            
+
                         },
 
                         new Author()
@@ -102,17 +117,17 @@ namespace SacriArt.Domain
                             FullName = "Petro Bevza",
                             Bio = "Bio of Petro Bevza"
                         }
-                                                
 
-                    });
 
-                    context.SaveChanges();
-                }
+                });
 
-                //Styles
-                if (!context.Styles.Any())
-                {
-                    context.Styles.AddRange(new List<Style>()
+                db.SaveChanges();
+            }
+
+            //Styles
+            if (!db.Styles.Any())
+            {
+                db.Styles.AddRange(new List<Style>()
                     {
                         new Style()
                         {
@@ -134,15 +149,15 @@ namespace SacriArt.Domain
                             Name = "abstractionism"
                         }
 
-                    });
+                });
 
-                    context.SaveChanges();
-                }
+                db.SaveChanges();
+            }
 
-                //ExhibitionTitles
-                if (!context.ExhibitionTitles.Any())
-                {
-                    context.ExhibitionTitles.AddRange(new List<ExhibitionTitle>()
+            //ExhibitionTitles
+            if (!db.ExhibitionTitles.Any())
+            {
+                db.ExhibitionTitles.AddRange(new List<ExhibitionTitle>()
                     {
                         new ExhibitionTitle()
                         {
@@ -162,16 +177,16 @@ namespace SacriArt.Domain
                         {
                             Name = "Thought as emotion"
                         }
-                       
-                    });
 
-                    context.SaveChanges();
-                }
+                });
 
-                //Paintings
-                if (!context.Paintings.Any())
-                {
-                    context.Paintings.AddRange(new List<Painting>()
+                db.SaveChanges();
+            }
+
+            //Paintings
+            if (!db.Paintings.Any())
+            {
+                db.Paintings.AddRange(new List<Painting>()
                     {
                          //surrealism
                         new Painting()
@@ -350,7 +365,7 @@ namespace SacriArt.Domain
                         {
                             Name = "Faust",
                             Year = 2009,
-                            ImageUrl = "../img/Abstractionism/Falcon.jpg",
+                            ImageUrl = "../img/Abstractionism/Faust.jpg",
                             ExhibitionTitleId = 4,
                             AuthorId = 14,
                             Size = "140 x 130 cm",
@@ -395,17 +410,107 @@ namespace SacriArt.Domain
                             Price = 4000
                         },
 
-                    });
+                });
 
-                    context.SaveChanges();
-                }
-
+                db.SaveChanges();
             }
 
+        }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Index(string name, int category = 0, int page = 1, SortOption sortOrder = SortOption.NameAsc)
+        {
+            int pageSize = 19;
+
+            IQueryable<Painting> paintings = db.Paintings; 
+
+            if (category != 0)
+            {
+                paintings = paintings.Where(p => p.AuthorId == category);
+            }
+            //if (!string.IsNullOrEmpty(name))
+            //{
+            //    paintings = paintings.Where(p => p.Name!.Contains(name));
+            //}
+            
+            // сортировка
+            switch (sortOrder)
+            {
+                case SortOption.NameDesc:
+                    paintings = paintings.OrderByDescending(s => s.Name);
+                    break;
+                case SortOption.PriceAsc:
+                    paintings = paintings.OrderBy(s => s.Price);
+                    break;
+                case SortOption.PriceDesc:
+                    paintings = paintings.OrderByDescending(s => s.Price);
+                    break;
+               
+                default:
+                    paintings = paintings.OrderBy(s => s.Name);
+                    break;
+            }
+
+            // пагинация
+            var count = await paintings.CountAsync();
+            var items = await paintings.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            // формируем модель представления
+            IndexViewModel viewModel = new IndexViewModel(
+                items,
+                new PageViewModel(count, page, pageSize),
+                new FilterViewModel(db.Authors.ToList(), db.ExhibitionTitles.ToList(), db.Styles.ToList(), category),
+                new SortViewModel(sortOrder)
+            );
+
+            return View(viewModel);
+
+                       
+        }
+
+        /*Додавання продукту*/
+        public IActionResult Create()
+        {
+            
+            ViewBag.Authors = new SelectList(db.Authors, "FullName", "FullName");
+            ViewBag.ExhibitionTitles = new SelectList(db.ExhibitionTitles, "Name", "Name");
+            ViewBag.Styles = new SelectList(db.Styles, "Name", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Painting painting, IFormFile uploadedFile)
+        {
+
+            if (uploadedFile != null)
+            {
+                
+                string path = "/img/new/" + uploadedFile.FileName;
+                
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+
+                painting.ImageUrl = path;
+
+                db.Paintings.Add(painting);
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
         }
 
 
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

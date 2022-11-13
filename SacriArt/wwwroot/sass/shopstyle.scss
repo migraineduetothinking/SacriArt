@@ -51,7 +51,11 @@ h6{
 	font-size: inherit;
 }
 
-
+p,
+a, {
+	text-decoration: none;
+	color: azure;
+}
 
 html,
 body{
@@ -470,4 +474,7 @@ tbody {
 }
 
 
-
+.change_me_later {
+	text-decoration: none;
+	color:azure;
+}
