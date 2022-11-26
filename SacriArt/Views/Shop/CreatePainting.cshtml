@@ -1,12 +1,10 @@
 ﻿@model SacriArt.Models.ShopModels.Painting
 
-@{
-    
-}
+
 <h2>Adding new Painting</h2>
 
 <div class="container">
-    <form asp-action="Create" asp-controller="Shop" method="post" enctype="multipart/form-data">
+    <form asp-action="CreatePainting" asp-controller="Shop" method="post" enctype="multipart/form-data">
         
         <p>
             @Html.LabelFor(m => m.Name, "Painting name")
@@ -36,9 +34,8 @@
         </p>
         <p>
             @Html.LabelFor(m => m.Style, "Style")
-            <select class="select option" asp-for="Style.Name" asp-items="ViewBag.Styles">
-                <option value="value1">Значение 1</option>
-            </select>
+            <select class="select option" asp-for="Style.Name" asp-items="ViewBag.Styles"></select>
+
         </p>
         <p>
             @Html.LabelFor(m => m.Price, "Price")

@@ -1,4 +1,5 @@
 ﻿@model IndexViewModel
+@inject UserManager<IdentityUser> UserManager; 
 
 
 <style>
@@ -17,70 +18,78 @@
 </style>
 
 
+@*<div class="shop-part">*@
+    <div class="sorts">
+        @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))*@
+        @if (User.Identity.IsAuthenticated )
+        {
+            <div class="admin-add-elem">
+                <a asp-area="Admin" asp-controller="Admin" asp-action="CreatePainting" class="admin-add-elem_btn">Add Painting</a>
+            </div>
+            <div class="admin-add-elem">
+                <a asp-area="Admin" asp-controller="Admin" asp-action="CreateExhibitionTitle" class="admin-add-elem_btn">Add Exhibition title</a>
+            </div>
+            <div class="admin-add-elem">
+                <a asp-area="Admin" asp-controller="Admin" asp-action="CreateAuthor" class="admin-add-elem_btn">Add Author</a>
+            </div>
+            <div class="admin-add-elem">
+                <a asp-area="Admin" asp-controller="Admin" asp-action="CreateStyle" class="admin-add-elem_btn">Add Style</a>
+            </div>
+        }
 
-<p><a asp-controller="Shop" asp-action="Create" >Add Painting</a></p>
+           
+        <div class="login-elem">
+        <a asp-area="" asp-controller="Account" asp-action="Index" class="loginelem_btn">Log in</a>
+        </div>
+          
+        <div class="sort-elem">
+           <a  asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"> 
+               Sort by Price
+           </a>
+        </div>
 
-@*<form method="get">
-    <label>Name: </label>
-    <input name="name" value="@Model.FilterViewModel.SelectedCategory" />
+        <div class ="sort-elem">
+           <a  asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"> 
+               Sort by Name
+           </a>
+        </div>
+    </div>
 
-    <label>Exhibition title: </label>
-    <select name="company" asp-items="Model.FilterViewModel.ExhibitionTitles"></select>
-
-    <label>Author: </label>
-    <select name="company" asp-items="Model.FilterViewModel.Authors"></select>
-
-    <label>Style: </label>
-    <select name="company" asp-items="Model.FilterViewModel.Styles"></select>
-
-    <input type="submit" value="Search" />
-</form>
-*@
-
-<tr>
+    <ul class="prod-container">
     
-    <th >
-        <a class="change_me_later" asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
-           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
-           asp-route-category="@(Model.FilterViewModel.SelectedCategory)">Sort by Price</a>
-    </th>
-   
-    <th >
-        <a class="change_me_later"  asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
-           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
-           asp-route-category="@(Model.FilterViewModel.SelectedCategory)">Sort by Name</a>
-    </th>
-</tr>
 
+        @foreach (Painting painting in Model.Paintings)
+        {
+            <li class="prod-element">
 
-<ul class="prod-container" ">
-    
-    @foreach (Painting painting in Model.Paintings)
-    {
-        <li class="prod-element">
+                <span class="prod-element__name">@painting.Name</span>
+                <span class="prod-element__year">@painting.Year</span>
+		        <img class="prod-element__img" src=" @painting.ImageUrl "/>
+		        <span class="prod-element__exh-title">@painting.ExhibitionTitle?.Name</span>
+                <span class="prod-element__author">@painting.Author?.FullName</span>
+                <span class="prod-element__style_size">@painting.Size, @painting.Style?.Name </span>
+		        <span >  &nbsp; </span>
 
-            <span class="prod-element__name">@painting.Name</span>
-            <span class="prod-element__year">@painting.Year</span>
-		    <img class="prod-element__img" src=" @painting.ImageUrl "/>
-		    <span class="prod-element__exh-title">@painting.ExhibitionTitle?.Name</span>
-            <span class="prod-element__author">@painting.Author?.FullName</span>
-            <span class="prod-element__style_size">@painting.Size, @painting.Style?.Name </span>
-		    <span >  &nbsp; </span>
-
-		    <div>
-		        <span class="prod-element__price">@painting.Price USD</span>
-		        @*<span class="prod-element__btn${activeClass}" onclick="prodPage.handlesetLS(this, '${id}');" > ${activeIcon}  </span>*@
-		    </div>
+		        <div>
+		            <span class="prod-element__price">@painting.Price USD</span>
+		        
+		        </div>
 				
-	    </li>
+	        </li>
         
 
-    }
+        }
     
 
-</ul>
+    </ul>
+@*</div>*@
 
 <p>
+
     @if (Model.PageViewModel.HasPreviousPage)
     {
         <a asp-action="Index"
@@ -91,6 +100,7 @@
             Previous
         </a>
     }
+
     @if (Model.PageViewModel.HasNextPage)
     {
         <a asp-action="Index"
@@ -101,7 +111,9 @@
             Next
         </a>
     }
+
 </p>
+
 
 
 <script>

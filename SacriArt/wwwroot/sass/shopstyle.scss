@@ -18,6 +18,13 @@
       0 16px 24px 2px rgba(33,37,41,.02),
       0 6px 30px 5px rgba(33,37,41,.04),
       0 8px 10px -5px rgba(33,37,41,.1);
+
+  	--auth_info_outline_color: #f7f5f5;
+	--auth_input_hover_color: #f7f5f5;
+	--auth_input_focus_color: #f7f5f5;
+	--auth_box-shadow_color: rgb(202, 198, 198);
+	--outline_btn_color: #807e7e;
+	--hover_color_signin: #4071a3;
 }
 
 
@@ -58,12 +65,13 @@ a, {
 }
 
 html,
-body{
+body {
 	height: 100%;
 	line-height: 1;
-	font-size: 16px;
-	color:var(--text_color);
+	font-size: 18px;
+	color: var(--text_color);
 	font-weight: 500;
+	font-family: 'Titillium Web';
 }
 
 
@@ -127,7 +135,7 @@ body{
 }
 
 ._ibg{
-position: relative;
+	position: relative;
 }
 
 ._ibg img{
@@ -139,17 +147,66 @@ position: relative;
 	object-fit:cover;
 }
 
-//------Product-maybe useless)))-----///
+
+
+//------Shop-part-----///
+
+.shop-part {
+	max-width: 1100px;
+	margin-top: 140px;
+	margin-left: 420px;
+	
+}
+
+.sorts {
+	display: flex;
+	margin: 0px auto;
+	margin-top: 140px;
+	max-width: 1260px;
+	justify-content: flex-end;
+}
+
+.admin-add-elem {
+	height:24px;
+	width: 170px;
+	font-size: 20px;
+	display: inline-block;
+	margin-left: 30px;
+	background-color: var(--back_color_footer_black);
+	color: var(--text_color);
+	outline: 2px solid var(--outline_btn_color);
+	border-radius: 0.1vw;
+	cursor: pointer;
+	text-align: center;
+
+}
+
+.admin-add-elem:hover {
+	background-color: var(--hover_color_signin);
+}
+
+.admin-add-elem_btn {
+	
+	margin: 0px auto;
+	top:2px;
+	position: relative;
+}
+
+.sort-elem {
+	font-size: 20px;
+	display: inline-block;
+	margin-left: 30px;
+}
+
 
 .prod-container {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	grid-gap: 25px;
-	width: 90%;
-	max-width: 1200px;
-	margin: 120px 0px 0px 0px;
-	margin-left: auto;
+	max-width: 1260px;
 	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
 }
 
 .prod-element {
@@ -159,6 +216,7 @@ position: relative;
 	box-shadow: var(--box-shadow);
 	margin: 0px 0px var(--spacing-medium) 0px;
 	background-color: #4c4d4d;
+	font-size:18px;
 }
 
 .prod-element__name {
@@ -470,11 +528,84 @@ tbody {
 
 .brend{
 	margin-top: 10px;
-	font-family: 'Titillium Web';
+	
+}
+
+.authorization_panel {
+	max-height: 500px;
+	min-height: 250px;
+	margin: 0px auto;
+	margin-top: 210px;
+	margin-bottom: 110px;
+	max-width: 1240px;
+	text-align: center;
+}
+
+.authorization_panel-text {
+	font-size: 24px;
+}
+
+.authorization_panel-box {
+	margin: 0px auto;
+	margin-top: 35px;
+	max-width: 560px;
 }
 
 
-.change_me_later {
-	text-decoration: none;
-	color:azure;
+.login, .password, .rememberMe {
+	margin-bottom: 25px;
+}
+
+.login_label, .password_label {
+	margin-right: 10px;
+}
+
+.login_input, .password_input {
+	height: 35px;
+	width: 290px;
+	outline: 1px solid var(--auth_info_outline_color);
+	border-radius: 0.1vw;
+	font-size: 18px;
+	padding-left: 5px;
+}
+
+.login_input::placeholder, .password_input::placeholder {
+	font-size: 16px;
+}
+
+.login_input:hover, .password_input:hover {
+	outline: 2px solid var(--outline_signIn_btn_color);
+	box-shadow: 0 0 5px var(--auth_box-shadow_color);
+}
+
+.login_input:focus, .password_input:focus {
+	outline: 2px solid var(--auth_input_focus_color);
+	box-shadow: 0 0 7px var(--auth_box-shadow_color);
+}
+
+.rememberMe_label {
+	vertical-align: top;
+	font-size: 17px;
+	margin-right: 10px;
+}
+
+.rememberMe_input {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+}
+
+.submit_btn {
+	height: 40px;
+	width: 110px;
+	background-color: var(--back_color_footer_black);
+	color: var(--text_color);
+	outline: 2px solid var(--outline_btn_color);
+	border-radius: 0.1vw;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.submit_btn:hover {
+	background-color: var(--hover_color_signin);
 }

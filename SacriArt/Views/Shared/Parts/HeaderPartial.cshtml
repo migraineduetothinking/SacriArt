@@ -1,4 +1,6 @@
 ﻿
+
+
 <header class="header">
 		<div class="header_container _container">
 			@if (ViewBag.Title != null)
@@ -9,25 +11,22 @@
 			}
 			else {
 				<a href="" class="header_logo">
-					@*@Config.CompanyName*@
+					@Config.CompanyName
 				</a>
 			}
 
 
-				<div class="header">
-					<div class="header-container">
-							<a href="../sacriart.html" target="_blank" class="header_logo">
-								SacriShop
-							</a>
+			<div class="header">
+				<div class="header-container">
+						<a href="../sacriart.html" target="_blank" class="header_logo">
+							SacriShop
+						</a>
 
-							<div class="header-counter" onclick="headerPage.handlerOpenCart();"> 
-
-								<i class="fa-solid fa-basket-shopping fa-2x"></i>
 						
-							</div>
-					</div> 
-				</div>
+				</div> 
+			</div>
 
+			
 			@*<nav class="header_menu menu">
 				<ul id="menu" class="menu_list">
 					<li class="menu_item">

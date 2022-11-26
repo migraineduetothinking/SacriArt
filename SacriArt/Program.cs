@@ -1,7 +1,10 @@
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SacriArt.Domain;
+using SacriArt.Services;
+
+
 
 namespace SacriArt
 {
@@ -11,36 +14,57 @@ namespace SacriArt
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            
-            builder.Services.AddControllersWithViews();
+
+           // builder.Services.AddControllersWithViews();
 
             builder.Configuration.Bind("ConnectionStrings", new Config());
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Config.ConnectionString));
 
-            //builder.Services.AddScoped<IPaintingService, PaintingService>();
+           
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+            {
+                opts.User.RequireUniqueEmail = true;
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 
-            //builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
-            //{
-            //    opts.User.RequireUniqueEmail = true;
-            //    opts.Password.RequiredLength = 6;
-            //    opts.Password.RequireNonAlphanumeric = false;
-            //    opts.Password.RequireLowercase = false;
-            //    opts.Password.RequireUppercase = false;
-            //    opts.Password.RequireDigit = false;
-            //}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "sacriartAuth";
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/account/accessdenied";
+                options.SlidingExpiration = true;
+            });
 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>  {
+                    options.Cookie.Name = "sacriartAuth";
+                    options.Cookie.HttpOnly = true;
+                    options.LoginPath = "/Account/Login";
+                    options.AccessDeniedPath = "/account/accessdenied";
+                    options.SlidingExpiration = true;
+                } );
+            builder.Services.AddAuthorization();
 
-            //builder.Services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.Cookie.Name = "sacriartAuth";
-            //    options.Cookie.HttpOnly = true;
-            //    options.LoginPath = "/account/login";
-            //    options.AccessDeniedPath = "/account/accessdenied";
-            //    options.SlidingExpiration = true;
-            //});
+            builder.Services.AddAuthorization(x =>
+            {
+                x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
+            });
 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+
+            builder.Services.AddControllersWithViews(x => {
+                x.Conventions.Add(new Authorization("Admin", "AdminArea"));
+            });
 
             var app = builder.Build();
 
@@ -56,13 +80,18 @@ namespace SacriArt
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Shop}/{action=Index}/{id?}");
 
-            //AppDbInitializer.Seed(app);
+            
+
+            AppDbInitializer.Seed(app); 
+
+           // AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
             app.Run();
         }

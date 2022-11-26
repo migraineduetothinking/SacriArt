@@ -1,4 +1,6 @@
-﻿using SacriArt.Models.ShopModels;
+﻿using Microsoft.AspNetCore.Identity;
+using SacriArt.Models.ShopModels;
+using SacriArt.Domain.Static;
 
 namespace SacriArt.Domain
 {
@@ -12,7 +14,7 @@ namespace SacriArt.Domain
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
                 context.Database.EnsureCreated();
-
+                
                 //Authors
                 if (!context.Authors.Any())
                 {
@@ -405,7 +407,68 @@ namespace SacriArt.Domain
 
         }
 
+        //public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        //{
+        //    using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+        //    {
 
+        //        //Roles
+        //        var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        //        //Users
+        //        var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+
+
+        //        //Admins 
+        //        if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+        //            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                        
+        //        string adminUserEmail = "admin@sacriArt.com";
+
+        //        var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+
+        //        if (adminUser == null)
+        //        {
+        //            var newAdminUser = new User()
+        //            {
+        //                FullName = "Admin User",
+        //                UserName = "admin",
+        //                NormalizedUserName = "ADMIN",
+        //                Email = adminUserEmail,
+        //                NormalizedEmail = adminUserEmail.ToUpper(),
+        //                EmailConfirmed = true,
+        //                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admpass"),
+        //                SecurityStamp = string.Empty
+        //            };
+        //            await userManager.CreateAsync(newAdminUser, "admpass");
+        //            await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+        //        }
+
+
+        //       // Users
+        //        if (!await roleManager.RoleExistsAsync(UserRoles.User))
+        //            await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+        //        string appUserEmail = "user@sacriArt.com";
+
+        //        var appUser = await userManager.FindByEmailAsync(appUserEmail);
+        //        if (appUser == null)
+        //        {
+        //            var newAppUser = new User()
+        //            {
+        //                FullName = "Application User",
+        //                UserName = "user",
+        //                NormalizedUserName = "User",
+        //                Email = appUserEmail,
+        //                NormalizedEmail = appUserEmail.ToUpper(),
+        //                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "userpass"),
+        //                EmailConfirmed = true
+        //            };
+        //            await userManager.CreateAsync(newAppUser, "userpass");
+        //            await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+        //        }
+        //    }
+        //}
 
     }
 }

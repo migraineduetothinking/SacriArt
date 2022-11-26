@@ -7,6 +7,7 @@ namespace SacriArt.Domain
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
         {
           
@@ -16,6 +17,32 @@ namespace SacriArt.Domain
         {
           
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "2",
+                Name = "admin",
+                NormalizedName = "ADMIN"
+            });
+
+            modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
+            {
+                Id = "2",
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "my@email.com",
+                NormalizedEmail = "MY@EMAIL.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admpass"),
+                SecurityStamp = string.Empty
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "2",
+                UserId = "2"
+            });
+
         }
 
 
