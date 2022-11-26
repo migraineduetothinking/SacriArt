@@ -50,8 +50,7 @@ namespace SacriArt
                     options.AccessDeniedPath = "/account/accessdenied";
                     options.SlidingExpiration = true;
                 } );
-            builder.Services.AddAuthorization();
-
+            
             builder.Services.AddAuthorization(x =>
             {
                 x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
