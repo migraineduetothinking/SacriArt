@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SacriArt.Domain;
+using SacriArt.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SacriArt.Models.ShopModels;
 using SacriArt.Models.ViewModels;
 using System.Diagnostics;
-
-
+using System.Security.Claims;
 
 namespace SacriArt.Areas.Admin.Controllers
 {
@@ -37,6 +36,7 @@ namespace SacriArt.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
@@ -75,7 +75,7 @@ namespace SacriArt.Areas.Admin.Controllers
         /*Adding new Author*/
         public IActionResult CreateAuthor()
         {
-
+            
             return View();
         }
 

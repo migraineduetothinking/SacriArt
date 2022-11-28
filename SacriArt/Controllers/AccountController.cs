@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SacriArt.Domain;
+using SacriArt.Data;
 using SacriArt.Models.ShopModels;
 using SacriArt.Models.ViewModels;
 
@@ -41,7 +41,8 @@ namespace SacriArt.Controllers
                 var user = await _userManager.FindByNameAsync(model.UserName);
                 if (user != null)
                 {
-                    await _signInManager.SignOutAsync();
+                    //await _signInManager.SignOutAsync();
+
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
@@ -57,7 +58,7 @@ namespace SacriArt.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Shop");
         }
     }
 

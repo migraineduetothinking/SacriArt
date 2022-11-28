@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using SacriArt.Domain;
+using SacriArt.Data;
 using SacriArt.Models.ShopModels;
 using SacriArt.Models.ViewModels;
 using System.Diagnostics;
@@ -81,9 +81,26 @@ namespace SacriArt.Controllers
 
             return View(viewModel);
 
-                       
+
         }
 
+        /*Adding new Author*/
+        public IActionResult CreateAuthor()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAuthor(Author author)
+        {
+
+
+            db.Authors.Add(author);
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
         public IActionResult Privacy()
         {
             return View();

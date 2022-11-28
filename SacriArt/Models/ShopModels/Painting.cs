@@ -1,5 +1,5 @@
 ﻿
-using SacriArt.Domain;
+using SacriArt.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

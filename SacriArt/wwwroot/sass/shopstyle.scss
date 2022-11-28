@@ -1,30 +1,35 @@
 
 :root {
-  --text_color:#fff;
-  --back_main_color: #333333;
-  --back_color:#000;
-  --base_white: #fff;
-  --scroll_thumb:#000;
-  --cart_color:#707070;
-  --invert_color:#000;
+	--text_color: #fff;
+	--back_main_color: #333333;
+	--back_color: #000;
+	--base_white: #fff;
+	//
 
-  --spacing-supsmall:8px;
-  --spacing-small:12px;
-  --spacing-medium:20px;
-  --spacing-large:25px;
-
-  --box-shadow:
-
-      0 16px 24px 2px rgba(33,37,41,.02),
-      0 6px 30px 5px rgba(33,37,41,.04),
-      0 8px 10px -5px rgba(33,37,41,.1);
-
-  	--auth_info_outline_color: #f7f5f5;
+	--scroll_thumb: #000;
+	--cart_color: #707070;
+	--invert_color: #000;
+	//
+	--spacing-supsmall: 8px;
+	--spacing-small: 12px;
+	--spacing-medium: 20px;
+	--spacing-large: 25px;
+	//
+	--box-shadow: 0 16px 24px 2px rgba(33,37,41,.02), 
+		0 6px 30px 5px rgba(33,37,41,.04), 
+		0 8px 10px -5px rgba(33,37,41,.1);
+	//
+	--auth_info_outline_color: #f7f5f5;
 	--auth_input_hover_color: #f7f5f5;
 	--auth_input_focus_color: #f7f5f5;
 	--auth_box-shadow_color: rgb(202, 198, 198);
+	//
 	--outline_btn_color: #807e7e;
+	//
 	--hover_color_signin: #4071a3;
+	--back_color_logout_btn: #f14d47;
+	
+
 }
 
 
@@ -59,7 +64,7 @@ h6{
 }
 
 p,
-a, {
+a {
 	text-decoration: none;
 	color: azure;
 }
@@ -96,9 +101,9 @@ body {
 
 
 .header-container {
-	max-width: 1200px;
+	max-width: 1260px;//1200
 	margin: 0px auto;
-	padding: 0px 20px;
+	//padding-left:  20px;
 	box-sizing: content-box;
 	display: flex;
 	min-height: 90px;
@@ -147,15 +152,35 @@ body {
 	object-fit:cover;
 }
 
+.acoount-elem {
+	height: 40px;
+	width: 75px;
+	background-color: var(--back_color_footer_black);
+	color: var(--text_color);
+	
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.acoount-elem:hover {
+	background-color: var(--hover_color_signin);
+	outline: 2px solid var(--outline_btn_color);
+	border-radius: 0.1vw;
+}
+
+.acoount_btn {
+	font-size:20px;
+	position: relative;
+	top: 10px;
+	left: 10px;
+}
 
 
 //------Shop-part-----///
-
 .shop-part {
 	max-width: 1100px;
 	margin-top: 140px;
 	margin-left: 420px;
-	
 }
 
 .sorts {
@@ -164,6 +189,17 @@ body {
 	margin-top: 140px;
 	max-width: 1260px;
 	justify-content: flex-end;
+}
+
+.admin {
+	max-height: 500px;
+	min-height: 250px;
+	margin-top: 90px;
+	margin-bottom: 200px;
+}
+
+.adminPanel {
+	margin: 0px auto;
 }
 
 .admin-add-elem {
@@ -190,6 +226,69 @@ body {
 	margin: 0px auto;
 	top:2px;
 	position: relative;
+}
+
+.adminPanel_logout {
+	margin-top: 20px;
+	text-align: center;
+	margin: 0px auto;
+}
+
+.logout_btn {
+	height: 40px;
+	width: 110px;
+	background-color: var(--back_color_footer_black);
+	color: var(--text_color);
+	outline: 2px solid var(--outline_btn_color);
+	border-radius: 0.1vw;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.logout_btn:hover {
+	background-color: var( --back_color_logout_btn);
+}
+
+
+.create {
+	max-height: 500px;
+	min-height: 250px;
+	max-width: 1260px;
+	margin: 0px auto;
+	margin-top: 90px;
+	margin-bottom: 200px;
+}
+
+
+.create-form_part {
+	margin-bottom: 25px;
+}
+
+.create-form_part_label {
+	margin-right: 10px;
+}
+
+.create-form_part_input {
+	height: 35px;
+	width: 290px;
+	outline: 1px solid var(--auth_info_outline_color);
+	border-radius: 0.1vw;
+	font-size: 18px;
+	padding-left: 5px;
+}
+
+.create-form_part_input::placeholder {
+	font-size: 16px;
+}
+
+.create-form_part_input:hover {
+	outline: 2px solid var(--outline_signIn_btn_color);
+	box-shadow: 0 0 5px var(--auth_box-shadow_color);
+}
+
+.create-form_part_input:focus {
+	outline: 2px solid var(--auth_input_focus_color);
+	box-shadow: 0 0 7px var(--auth_box-shadow_color);
 }
 
 .sort-elem {
@@ -425,29 +524,46 @@ tbody {
 	font-size: 20px;
 }
 
-//-----------FOOTER--------------// 
+.pages{
+	width:1260px;
+	margin:0px auto;
+	
+}
 
+.glyphicon {
+	display: inline-block;
+	padding: 0 5px;
+
+	
+}
+
+.glyphicon-chevron-right:after {
+	content: "\00BB";
+	
+}
+
+
+.glyphicon-chevron-left:before {
+	content: "\00AB";
+	
+}
+
+//-----------FOOTER--------------//
 .footer {
 	text-align: center;
 	background-color: var(--back_color);
 	padding: 25px 0px;
-	
+
 
 	&_content {
-
 	}
 
 	&_info {
-
 	}
 
 	&_socials {
-	margin: 0px 0px 20px;
-
+		margin: 0px 0px 20px;
 	}
-	
-
-
 }
 
 .info {

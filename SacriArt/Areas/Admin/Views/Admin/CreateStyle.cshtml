@@ -5,8 +5,8 @@
 }
 <h2>Adding new Style</h2>
 
-<div class="container">
-    <form asp-action="CreateStyle" asp-controller="Shop" method="post" enctype="multipart/form-data">
+<div class="create">
+    <form asp-area="Admin" asp-controller="Admin" asp-action="CreateStyle" method="post" enctype="multipart/form-data">
         
         <p>
             @Html.LabelFor(m => m.Name, "Style name")

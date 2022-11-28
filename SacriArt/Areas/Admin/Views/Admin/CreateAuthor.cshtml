@@ -1,0 +1,34 @@
+﻿@model SacriArt.Models.ShopModels.Author
+
+@{
+    
+}
+<h2>Adding new Author</h2>
+
+<div class="create">
+    <form asp-area="Admin" asp-action="CreateAuthor" asp-controller="Admin" method="post"  enctype="multipart/form-data">
+        <div class="create-form_part">
+            <p class="create-form_part_input">
+                @Html.LabelFor(m => m.FullName, "Author Full name")
+                @Html.EditorFor(m => m.FullName)
+            </p>
+        </div>
+        <div class="create-form_part_input">
+        <p>
+            @Html.LabelFor(m => m.Bio, "Author BIO")
+            @Html.EditorFor(m => m.Bio)
+        </p>
+        </div>      
+        
+        <p>
+            <input type="submit" class="submit_btn" value="Save" />
+        </p>
+    </form>
+</div>
+
+<script>
+    $(".select option").each(function () {
+        $(this).siblings('[value="' + this.value + '"]').remove();
+    });
+</script>
+        

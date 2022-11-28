@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domain\Services\**" />
-    <Content Remove="Domain\Services\**" />
-    <EmbeddedResource Remove="Domain\Services\**" />
-    <None Remove="Domain\Services\**" />
+    <Compile Remove="Data\Services\**" />
+    <Content Remove="Data\Services\**" />
+    <EmbeddedResource Remove="Data\Services\**" />
+    <None Remove="Data\Services\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +33,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
 
   <ItemGroup>

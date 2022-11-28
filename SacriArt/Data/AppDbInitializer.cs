@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SacriArt.Models.ShopModels;
-using SacriArt.Domain.Static;
+using SacriArt.Data.Static;
 
-namespace SacriArt.Domain
+namespace SacriArt.Data
 {
     public class AppDbInitializer
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace SacriArt.Domain.Static
+namespace SacriArt.Data.Static
 {
     public static class UserRoles
     {

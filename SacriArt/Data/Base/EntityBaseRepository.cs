@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace SacriArt.Domain;
+namespace SacriArt.Data;
 
 public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
 {

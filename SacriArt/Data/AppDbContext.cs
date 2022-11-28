@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SacriArt.Models.ShopModels;
 
-namespace SacriArt.Domain
+namespace SacriArt.Data
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
@@ -24,6 +24,8 @@ namespace SacriArt.Domain
                 Name = "admin",
                 NormalizedName = "ADMIN"
             });
+
+
 
             modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
             {

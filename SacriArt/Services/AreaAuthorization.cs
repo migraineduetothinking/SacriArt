@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SacriArt.Services
 {
-    public class Authorization : IControllerModelConvention
+    public class AreaAuthorization : IControllerModelConvention
     {
 
         private readonly string area;
         private readonly string policy;
 
-        public Authorization(string area, string policy)
+        public AreaAuthorization(string area, string policy)
         {
             this.area = area;
             this.policy = policy;

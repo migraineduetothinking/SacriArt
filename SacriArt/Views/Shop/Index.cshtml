@@ -2,46 +2,26 @@
 @inject UserManager<IdentityUser> UserManager; 
 
 
-<style>
-    .glyphicon {
-        display: inline-block;
-        padding: 0 5px;
-    }
-
-    .glyphicon-chevron-right:after {
-        content: "\00BB";
-    }
-
-    .glyphicon-chevron-left:before {
-        content: "\00AB";
-    }
-</style>
-
 
 @*<div class="shop-part">*@
     <div class="sorts">
-        @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))*@
-        @if (User.Identity.IsAuthenticated )
-        {
-            <div class="admin-add-elem">
-                <a asp-area="Admin" asp-controller="Admin" asp-action="CreatePainting" class="admin-add-elem_btn">Add Painting</a>
-            </div>
-            <div class="admin-add-elem">
-                <a asp-area="Admin" asp-controller="Admin" asp-action="CreateExhibitionTitle" class="admin-add-elem_btn">Add Exhibition title</a>
-            </div>
-            <div class="admin-add-elem">
-                <a asp-area="Admin" asp-controller="Admin" asp-action="CreateAuthor" class="admin-add-elem_btn">Add Author</a>
-            </div>
-            <div class="admin-add-elem">
-                <a asp-area="Admin" asp-controller="Admin" asp-action="CreateStyle" class="admin-add-elem_btn">Add Style</a>
-            </div>
-        }
 
-           
-        <div class="login-elem">
-        <a asp-area="" asp-controller="Account" asp-action="Index" class="loginelem_btn">Log in</a>
-        </div>
-          
+         @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+         {
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="CreatePainting" class="admin-add-elem_btn"> Add Painting</a>
+            </div>
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="CreateExhibitionTitle" class="admin-add-elem_btn" > Add Exhibition title</a>
+            </div>
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Shop" asp-action="CreateAuthor" class="admin-add-elem_btn"> Add Author</a>
+            </div>
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="CreateStyle" class="admin-add-elem_btn" > Add Style</a>
+            </div>
+         }
+
         <div class="sort-elem">
            <a  asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
                asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
@@ -57,6 +37,7 @@
                Sort by Name
            </a>
         </div>
+
     </div>
 
     <ul class="prod-container">
@@ -88,7 +69,7 @@
     </ul>
 @*</div>*@
 
-<p>
+<div class="pages">
 
     @if (Model.PageViewModel.HasPreviousPage)
     {
@@ -112,7 +93,7 @@
         </a>
     }
 
-</p>
+</div>
 
 
 
