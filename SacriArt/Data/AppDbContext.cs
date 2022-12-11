@@ -12,41 +12,7 @@ namespace SacriArt.Data
         {
           
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-          
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Id = "2",
-                Name = "admin",
-                NormalizedName = "ADMIN"
-            });
-
-
-
-            modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
-            {
-                Id = "2",
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
-                Email = "my@email.com",
-                NormalizedEmail = "MY@EMAIL.COM",
-                EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admpass"),
-                SecurityStamp = string.Empty
-            });
-
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
-            {
-                RoleId = "2",
-                UserId = "2"
-            });
-
-        }
-
+               
 
         public DbSet<Painting> Paintings { get; set; } = null!;
         public DbSet<Author> Authors { get; set; } = null!;

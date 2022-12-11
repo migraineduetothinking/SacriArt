@@ -41,16 +41,6 @@ namespace SacriArt
                 options.SlidingExpiration = true;
             });
 
-            //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie(options =>
-            //    {
-            //        options.Cookie.Name = "sacriartAuth";
-            //        options.Cookie.HttpOnly = true;
-            //        options.LoginPath = "/Account/Login";
-            //        options.AccessDeniedPath = "/account/accessdenied";
-            //        options.SlidingExpiration = true;
-            //    });
-
             builder.Services.AddAuthorization(x =>
             {
                 x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
@@ -91,16 +81,13 @@ namespace SacriArt
                 name: "default",
                 pattern: "{controller=Shop}/{action=Index}/{id?}");
 
-           
-
-          
-            
 
             AppDbInitializer.Seed(app); 
 
-           // AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
+            AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
             app.Run();
+
         }
     }
 }
