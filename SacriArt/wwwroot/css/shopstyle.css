@@ -1,19 +1,26 @@
-﻿:root {
-  --text_color:#fff;
+﻿@charset "UTF-8";
+:root {
+  --text_color: #fff;
   --back_main_color: #333333;
-  --back_color:#000;
+  --back_color: #000;
   --base_white: #fff;
-  --scroll_thumb:#000;
-  --cart_color:#707070;
-  --invert_color:#000;
-  --spacing-supsmall:8px;
-  --spacing-small:12px;
-  --spacing-medium:20px;
-  --spacing-large:25px;
-  --box-shadow:
-      0 16px 24px 2px rgba(33,37,41,.02),
-      0 6px 30px 5px rgba(33,37,41,.04),
-      0 8px 10px -5px rgba(33,37,41,.1);
+  --scroll_thumb: #000;
+  --cart_color: #707070;
+  --invert_color: #000;
+  --spacing-supsmall: 8px;
+  --spacing-small: 12px;
+  --spacing-medium: 20px;
+  --spacing-large: 25px;
+  --box-shadow: 0 16px 24px 2px rgba(33,37,41,.02),
+  	0 6px 30px 5px rgba(33,37,41,.04),
+  	0 8px 10px -5px rgba(33,37,41,.1);
+  --auth_info_outline_color: #f7f5f5;
+  --auth_input_hover_color: #f7f5f5;
+  --auth_input_focus_color: #f7f5f5;
+  --auth_box-shadow_color: rgb(202, 198, 198);
+  --outline_btn_color: #807e7e;
+  --hover_color_signin: #4071a3;
+  --back_color_logout_btn: #f14d47;
 }
 
 *,
@@ -45,13 +52,20 @@ h6 {
   font-size: inherit;
 }
 
+p,
+a {
+  text-decoration: none;
+  color: azure;
+}
+
 html,
 body {
   height: 100%;
   line-height: 1;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--text_color);
   font-weight: 500;
+  font-family: "Titillium Web";
 }
 
 .wrapper {
@@ -72,9 +86,8 @@ body {
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 1260px;
   margin: 0px auto;
-  padding: 0px 20px;
   box-sizing: content-box;
   display: flex;
   min-height: 90px;
@@ -119,15 +132,152 @@ body {
   object-fit: cover;
 }
 
+.acoount-elem {
+  height: 40px;
+  width: 75px;
+  background-color: var(--back_color_footer_black);
+  color: var(--text_color);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.acoount-elem:hover {
+  background-color: var(--hover_color_signin);
+  outline: 2px solid var(--outline_btn_color);
+  border-radius: 0.1vw;
+}
+
+.acoount_btn {
+  font-size: 20px;
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+
+.shop-part {
+  max-width: 1100px;
+  margin-top: 140px;
+  margin-left: 420px;
+}
+
+.sorts {
+  display: flex;
+  margin: 0px auto;
+  margin-top: 140px;
+  max-width: 1260px;
+  justify-content: flex-end;
+}
+
+.admin {
+  max-height: 500px;
+  min-height: 250px;
+  margin-top: 90px;
+  margin-bottom: 200px;
+}
+
+.adminPanel {
+  margin: 0px auto;
+}
+
+.admin-add-elem {
+  height: 24px;
+  width: 170px;
+  font-size: 20px;
+  display: inline-block;
+  margin-left: 30px;
+  background-color: var(--back_color_footer_black);
+  color: var(--text_color);
+  outline: 2px solid var(--outline_btn_color);
+  border-radius: 0.1vw;
+  cursor: pointer;
+  text-align: center;
+}
+
+.admin-add-elem:hover {
+  background-color: var(--hover_color_signin);
+}
+
+.admin-add-elem_btn {
+  margin: 0px auto;
+  top: 2px;
+  position: relative;
+}
+
+.adminPanel_logout {
+  margin-top: 20px;
+  text-align: center;
+  margin: 0px auto;
+}
+
+.logout_btn {
+  height: 40px;
+  width: 110px;
+  background-color: var(--back_color_footer_black);
+  color: var(--text_color);
+  outline: 2px solid var(--outline_btn_color);
+  border-radius: 0.1vw;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout_btn:hover {
+  background-color: var(--back_color_logout_btn);
+}
+
+.create {
+  max-height: 500px;
+  min-height: 250px;
+  max-width: 1260px;
+  margin: 0px auto;
+  margin-top: 90px;
+  margin-bottom: 200px;
+}
+
+.create-form_part {
+  margin-bottom: 25px;
+}
+
+.create-form_part_label {
+  margin-right: 10px;
+}
+
+.create-form_part_input {
+  height: 35px;
+  width: 290px;
+  outline: 1px solid var(--auth_info_outline_color);
+  border-radius: 0.1vw;
+  font-size: 18px;
+  padding-left: 5px;
+}
+
+.create-form_part_input::placeholder {
+  font-size: 16px;
+}
+
+.create-form_part_input:hover {
+  outline: 2px solid var(--outline_signIn_btn_color);
+  box-shadow: 0 0 5px var(--auth_box-shadow_color);
+}
+
+.create-form_part_input:focus {
+  outline: 2px solid var(--auth_input_focus_color);
+  box-shadow: 0 0 7px var(--auth_box-shadow_color);
+}
+
+.sort-elem {
+  font-size: 20px;
+  display: inline-block;
+  margin-left: 30px;
+}
+
 .prod-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 25px;
-  width: 90%;
-  max-width: 1200px;
-  margin: 120px 0px 0px 0px;
-  margin-left: auto;
+  max-width: 1260px;
   margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
 }
 
 .prod-element {
@@ -137,6 +287,7 @@ body {
   box-shadow: var(--box-shadow);
   margin: 0px 0px var(--spacing-medium) 0px;
   background-color: #4c4d4d;
+  font-size: 18px;
 }
 
 .prod-element__name {
@@ -327,6 +478,24 @@ tbody {
   font-size: 20px;
 }
 
+.pages {
+  width: 1260px;
+  margin: 0px auto;
+}
+
+.glyphicon {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.glyphicon-chevron-right:after {
+  content: "»";
+}
+
+.glyphicon-chevron-left:before {
+  content: "«";
+}
+
 .footer {
   text-align: center;
   background-color: var(--back_color);
@@ -388,5 +557,82 @@ tbody {
 
 .brend {
   margin-top: 10px;
-  font-family: "Titillium Web";
+}
+
+.authorization_panel {
+  max-height: 500px;
+  min-height: 250px;
+  margin: 0px auto;
+  margin-top: 210px;
+  margin-bottom: 110px;
+  max-width: 1240px;
+  text-align: center;
+}
+
+.authorization_panel-text {
+  font-size: 24px;
+}
+
+.authorization_panel-box {
+  margin: 0px auto;
+  margin-top: 35px;
+  max-width: 560px;
+}
+
+.login, .password, .rememberMe {
+  margin-bottom: 25px;
+}
+
+.login_label, .password_label {
+  margin-right: 10px;
+}
+
+.login_input, .password_input {
+  height: 35px;
+  width: 290px;
+  outline: 1px solid var(--auth_info_outline_color);
+  border-radius: 0.1vw;
+  font-size: 18px;
+  padding-left: 5px;
+}
+
+.login_input::placeholder, .password_input::placeholder {
+  font-size: 16px;
+}
+
+.login_input:hover, .password_input:hover {
+  outline: 2px solid var(--outline_signIn_btn_color);
+  box-shadow: 0 0 5px var(--auth_box-shadow_color);
+}
+
+.login_input:focus, .password_input:focus {
+  outline: 2px solid var(--auth_input_focus_color);
+  box-shadow: 0 0 7px var(--auth_box-shadow_color);
+}
+
+.rememberMe_label {
+  vertical-align: top;
+  font-size: 17px;
+  margin-right: 10px;
+}
+
+.rememberMe_input {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+}
+
+.submit_btn {
+  height: 40px;
+  width: 110px;
+  background-color: var(--back_color_footer_black);
+  color: var(--text_color);
+  outline: 2px solid var(--outline_btn_color);
+  border-radius: 0.1vw;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit_btn:hover {
+  background-color: var(--hover_color_signin);
 }

@@ -1,6 +1,8 @@
-﻿using SacriArt.Models.ShopModels;
+﻿using Microsoft.AspNetCore.Identity;
+using SacriArt.Models.ShopModels;
+using SacriArt.Data.Static;
 
-namespace SacriArt.Domain
+namespace SacriArt.Data
 {
     public class AppDbInitializer
     {
@@ -12,12 +14,19 @@ namespace SacriArt.Domain
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
                 context.Database.EnsureCreated();
-
+                
                 //Authors
                 if (!context.Authors.Any())
                 {
                     context.Authors.AddRange(new List<Author>()
                     {   
+
+                        new Author()
+                        {
+                            FullName = "All",
+                            
+                        },
+
                         new Author()
                         {
                             FullName = "Eduard Kolodiy",
@@ -95,7 +104,8 @@ namespace SacriArt.Domain
                             FullName = "Petro Bevza",
                             Bio = "Bio of Petro Bevza"
                         }
-                                     
+                                                
+
                     });
 
                     context.SaveChanges();
@@ -106,6 +116,11 @@ namespace SacriArt.Domain
                 {
                     context.Styles.AddRange(new List<Style>()
                     {
+                        new Style()
+                        {
+                            Name = "All"
+                        },
+
                         new Style ()
                         {
                             Name = "surrealism"
@@ -131,6 +146,10 @@ namespace SacriArt.Domain
                 {
                     context.ExhibitionTitles.AddRange(new List<ExhibitionTitle>()
                     {
+                        new ExhibitionTitle()
+                        {
+                            Name = "All"
+                        },
                         new ExhibitionTitle()
                         {
                             Name = "Surrealism as an attempt to escape"
@@ -162,10 +181,10 @@ namespace SacriArt.Domain
                             Name = "Self-sacrifice in the name of the ideal",
                             Year = 2012,
                             ImageUrl = "../img/Surrealism/Self-sacrifice.jpg",
-                            ExhibitionTitleId = 1,
-                            AuthorId = 1,
+                            ExhibitionTitleId = 2,
+                            AuthorId = 2,
                             Size = "140 x 240 cm",
-                            StyleId = 1,
+                            StyleId = 2,
                             Price = 17000
                         },
 
@@ -174,10 +193,10 @@ namespace SacriArt.Domain
                             Name = "Water",
                             Year = 2008,
                             ImageUrl = "../img/Surrealism/Water.jpg",
-                            ExhibitionTitleId = 1,
-                            AuthorId = 2,
+                            ExhibitionTitleId = 2,
+                            AuthorId = 3,
                             Size = "80 x 60 cm",
-                            StyleId = 1,
+                            StyleId = 2,
                             Price = 5400
                         },
 
@@ -186,10 +205,10 @@ namespace SacriArt.Domain
                             Name = "Seafood at the Opera",
                             Year = 2008,
                             ImageUrl = "../img/Surrealism/Seafood.jpg",
-                            ExhibitionTitleId = 1,
-                            AuthorId = 2,
+                            ExhibitionTitleId = 2,
+                            AuthorId = 3,
                             Size = "150 x 200 cm",
-                            StyleId = 1,
+                            StyleId = 2,
                             Price = 7300
                         },
 
@@ -199,10 +218,10 @@ namespace SacriArt.Domain
                             Name = "I love that",
                             Year = 2014,
                             ImageUrl = "../img/Surrealism/love.jpg",
-                            ExhibitionTitleId = 1,
-                            AuthorId = 3,
+                            ExhibitionTitleId = 2,
+                            AuthorId = 4,
                             Size = "175 x 170 cm",
-                            StyleId = 1,
+                            StyleId = 2,
                             Price = 3900
                         },
 
@@ -211,10 +230,10 @@ namespace SacriArt.Domain
                             Name = "Reflection II",
                             Year = 2011,
                             ImageUrl = "../img/Surrealism/Reflection.jpg",
-                            ExhibitionTitleId = 1,
-                            AuthorId = 4,
+                            ExhibitionTitleId = 2,
+                            AuthorId = 5,
                             Size = "120 x 120 cm",
-                            StyleId = 1,
+                            StyleId = 2,
                             Price = 1200
                         },
 
@@ -223,10 +242,10 @@ namespace SacriArt.Domain
                             Name = "From the series EAM",
                             Year = 2012,
                             ImageUrl = "../img/Surrealism/EAM.jpg",
-                            ExhibitionTitleId = 1,
-                            AuthorId = 5,
+                            ExhibitionTitleId = 2,
+                            AuthorId = 6,
                             Size = "60 x 60 cm",
-                            StyleId = 1,
+                            StyleId = 2,
                             Price = 600
                         },
 
@@ -236,10 +255,10 @@ namespace SacriArt.Domain
                             Name = "Zeppelin",
                             Year = 2016,
                             ImageUrl = "../img/Postmodernism/Zeppelin.jpg",
-                            ExhibitionTitleId = 2,
-                            AuthorId = 6,
+                            ExhibitionTitleId = 3,
+                            AuthorId = 7,
                             Size = "120 x 100 cm",
-                            StyleId = 2,
+                            StyleId = 3,
                             Price = 4400
                         },
 
@@ -248,10 +267,10 @@ namespace SacriArt.Domain
                             Name = "UFO",
                             Year = 2015,
                             ImageUrl = "../img/Postmodernism/UFO.jpg",
-                            ExhibitionTitleId = 2,
-                            AuthorId = 7,
+                            ExhibitionTitleId = 3,
+                            AuthorId = 8,
                             Size = "120 x 100 cm",
-                            StyleId = 2,
+                            StyleId = 3,
                             Price = 4700
                         },
 
@@ -260,10 +279,10 @@ namespace SacriArt.Domain
                             Name = "Transition I",
                             Year = 2016,
                             ImageUrl = "../img/Postmodernism/Transition.jpg",
-                            ExhibitionTitleId = 2,
-                            AuthorId = 6,
+                            ExhibitionTitleId = 3,
+                            AuthorId = 7,
                             Size = "60 x 60 cm",
-                            StyleId = 2,
+                            StyleId = 3,
                             Price = 1350
                         },
 
@@ -272,10 +291,10 @@ namespace SacriArt.Domain
                             Name = "Survival Technique",
                             Year = 2013,
                             ImageUrl = "../img/Postmodernism/survival.jpg",
-                            ExhibitionTitleId = 2,
-                            AuthorId = 8,
+                            ExhibitionTitleId = 3,
+                            AuthorId = 9,
                             Size = "92 x 120 cm",
-                            StyleId = 2,
+                            StyleId = 3,
                             Price = 3150
                         },
 
@@ -284,10 +303,10 @@ namespace SacriArt.Domain
                             Name = "Portrait of old Slav",
                             Year = 2013,
                             ImageUrl = "../img/Postmodernism/Slav.jpg",
-                            ExhibitionTitleId = 2,
-                            AuthorId = 9,
+                            ExhibitionTitleId = 3,
+                            AuthorId = 10,
                             Size = "170 x 140 cm",
-                            StyleId = 2,
+                            StyleId = 3,
                             Price = 8900
                         },
 
@@ -296,10 +315,10 @@ namespace SacriArt.Domain
                             Name = "Geography lesson",
                             Year = 2016,
                             ImageUrl = "../img/Postmodernism/lesson.jpg",
-                            ExhibitionTitleId = 2,
-                            AuthorId = 10,
+                            ExhibitionTitleId = 3,
+                            AuthorId = 11,
                             Size = "120 x 90 cm",
-                            StyleId = 2,
+                            StyleId = 3,
                             Price = 10200
                         },
 
@@ -309,10 +328,10 @@ namespace SacriArt.Domain
                             Name = "DB11",
                             Year = 1991,
                             ImageUrl = "../img/Abstractionism/DB11.jpg",
-                            ExhibitionTitleId = 3,
-                            AuthorId = 11,
+                            ExhibitionTitleId = 4,
+                            AuthorId = 12,
                             Size = "180 x 290 cm",
-                            StyleId = 3,
+                            StyleId = 4,
                             Price = 22000
                         },
 
@@ -321,10 +340,10 @@ namespace SacriArt.Domain
                             Name = "Falcon",
                             Year = 1999,
                             ImageUrl = "../img/Abstractionism/Falcon.jpg",
-                            ExhibitionTitleId = 3,
-                            AuthorId = 12,
+                            ExhibitionTitleId = 4,
+                            AuthorId = 13,
                             Size = "35 x 61 cm",
-                            StyleId = 3,
+                            StyleId = 4,
                             Price = 2150
                         },
 
@@ -334,10 +353,10 @@ namespace SacriArt.Domain
                             Name = "Faust",
                             Year = 2009,
                             ImageUrl = "../img/Abstractionism/Falcon.jpg",
-                            ExhibitionTitleId = 3,
-                            AuthorId = 13,
+                            ExhibitionTitleId = 4,
+                            AuthorId = 14,
                             Size = "140 x 130 cm",
-                            StyleId = 3,
+                            StyleId = 4,
                             Price = 9600
                         },
 
@@ -347,10 +366,10 @@ namespace SacriArt.Domain
                             Name = "Find me",
                             Year = 2009,
                             ImageUrl = "../img/Abstractionism/Find me.jpg",
-                            ExhibitionTitleId = 3,
-                            AuthorId = 13,
+                            ExhibitionTitleId = 4,
+                            AuthorId = 14,
                             Size = "160 x 120 cm",
-                            StyleId = 3,
+                            StyleId = 4,
                             Price = 6000
                         },
 
@@ -359,10 +378,10 @@ namespace SacriArt.Domain
                             Name = "No title",
                             Year = 2015,
                             ImageUrl = "../img/Abstractionism/notitle.jpg",
-                            ExhibitionTitleId = 3,
-                            AuthorId = 11,
+                            ExhibitionTitleId = 4,
+                            AuthorId = 12,
                             Size = "200 x 180 cm",
-                            StyleId = 3,
+                            StyleId = 4,
                             Price = 16000
                         },
 
@@ -371,10 +390,10 @@ namespace SacriArt.Domain
                             Name = "Intervention 11",
                             Year = 2015,
                             ImageUrl = "../img/Abstractionism/Find me.jpg",
-                            ExhibitionTitleId = 3,
-                            AuthorId = 11,
+                            ExhibitionTitleId = 4,
+                            AuthorId = 12,
                             Size = "71 x 95 cm",
-                            StyleId = 3,
+                            StyleId = 4,
                             Price = 4000
                         },
 
@@ -388,7 +407,65 @@ namespace SacriArt.Domain
 
         }
 
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
 
+                //Roles
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                //Users
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+                //Admins 
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+
+                string adminUserEmail = "admin@sacriArt.com";
+
+                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+
+                if (adminUser == null)
+                {
+                    var newAdminUser = new IdentityUser()
+                    {
+                        
+                        UserName = "admin",
+                        NormalizedUserName = "ADMIN",
+                        Email = adminUserEmail,
+                        NormalizedEmail = adminUserEmail.ToUpper(),
+                        EmailConfirmed = true,
+                        PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admpass"),
+                        SecurityStamp = string.Empty
+                    };
+                    await userManager.CreateAsync(newAdminUser, "admpass");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+
+
+                // AppUsers
+                //if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                //    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                //string appUserEmail = "user@sacriArt.com";
+
+                //var appUser = await userManager.FindByEmailAsync(appUserEmail);
+                //if (appUser == null)
+                //{
+                //    var newAppUser = new IdentityUser()
+                //    {
+                //        UserName = "user",
+                //        NormalizedUserName = "User",
+                //        Email = appUserEmail,
+                //        NormalizedEmail = appUserEmail.ToUpper(),
+                //        PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "userpass"),
+                //        EmailConfirmed = true
+                //    };
+                //    await userManager.CreateAsync(newAppUser, "userpass");
+                //    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                //}
+            }
+        }
 
     }
 }

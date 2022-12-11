@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SacriArt.Domain;
+using SacriArt.Data;
 
 #nullable disable
 
 namespace SacriArt.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221111182629_Initial")]
+    [Migration("20221112204014_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

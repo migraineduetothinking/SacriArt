@@ -1,0 +1,35 @@
+﻿@model LoginViewModel
+
+@{
+    string strTitle = "Log In";
+    ViewBag.Title = strTitle;
+}
+
+<div class="authorization_panel">
+    <h1 class="authorization_panel-text">Login</h1>
+    <div class="authorization_panel-box">
+        <form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl" asp-antiforgery="true">
+            <div asp-validation-summary="All"></div>
+            <div class="login">
+                @*<label  class="login_label" asp-for="UserName"></label>*@
+                <input class="login_input"  asp-for="UserName" type="text" placeholder="User Name" autocomplete="off"> 
+                <span asp-validation-for="UserName"></span>
+            </div>
+            <div class="password">
+               @* <label class="password_label" asp-for="Password"></label>*@
+                <input class="password_input"  asp-for="Password" type="password" placeholder="Password" autocomplete="new-password">    
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="rememberMe">
+                <label class="rememberMe_label" asp-for="RememberMe"></label>
+                <input class="rememberMe_input" asp-for="RememberMe"  >
+           
+                <span asp-validation-for="RememberMe"></span>
+            </div>
+            <div class="SignIn">
+                <input class="submit_btn" type="submit" value="Sign In" />
+            </div>
+
+        </form>
+    </div>
+</div>

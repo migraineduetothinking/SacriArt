@@ -1,0 +1,34 @@
+﻿
+@{
+    string strTitle = "Admin Pannel";
+    ViewBag.Title = strTitle;
+}
+
+<div class="admin">
+    
+    <div class="adminPanel">
+        <div class="adminPanel _container">
+            <div class="adminPanel_edit">
+                <h3>Edit site elements</h3>
+                <div class="admin-add-elem">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="CreatePainting" class="admin-add-elem_btn">Add Painting</a>
+                </div>
+                <div class="admin-add-elem">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="CreateExhibitionTitle" class="admin-add-elem_btn">Add Exhibition title</a>
+                </div>
+                <div class="admin-add-elem">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="CreateAuthor" class="admin-add-elem_btn">Add Author</a>
+                </div>
+                <div class="admin-add-elem">
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="CreateStyle" class="admin-add-elem_btn">Add Style</a>
+                </div>
+            </div>
+            <div class="adminPanel_logout">
+                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                    <input class="logout_btn" type="submit" value="Log out" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

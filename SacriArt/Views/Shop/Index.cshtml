@@ -1,0 +1,104 @@
+﻿@model IndexViewModel
+@inject UserManager<IdentityUser> UserManager; 
+
+
+
+@*<div class="shop-part">*@
+    <div class="sorts">
+
+         @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+         {
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="CreatePainting" class="admin-add-elem_btn"> Add Painting</a>
+            </div>
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="CreateExhibitionTitle" class="admin-add-elem_btn" > Add Exhibition title</a>
+            </div>
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Shop" asp-action="CreateAuthor" class="admin-add-elem_btn"> Add Author</a>
+            </div>
+            <div class="admin-add-elem">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="CreateStyle" class="admin-add-elem_btn" > Add Style</a>
+            </div>
+         }
+
+        <div class="sort-elem">
+           <a  asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"> 
+               Sort by Price
+           </a>
+        </div>
+
+        <div class ="sort-elem">
+           <a  asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+               asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"> 
+               Sort by Name
+           </a>
+        </div>
+
+    </div>
+
+    <ul class="prod-container">
+    
+
+        @foreach (Painting painting in Model.Paintings)
+        {
+            <li class="prod-element">
+
+                <span class="prod-element__name">@painting.Name</span>
+                <span class="prod-element__year">@painting.Year</span>
+		        <img class="prod-element__img" src=" @painting.ImageUrl "/>
+		        <span class="prod-element__exh-title">@painting.ExhibitionTitle?.Name</span>
+                <span class="prod-element__author">@painting.Author?.FullName</span>
+                <span class="prod-element__style_size">@painting.Size, @painting.Style?.Name </span>
+		        <span >  &nbsp; </span>
+
+		        <div>
+		            <span class="prod-element__price">@painting.Price USD</span>
+		        
+		        </div>
+				
+	        </li>
+        
+
+        }
+    
+
+    </ul>
+@*</div>*@
+
+<div class="pages">
+
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+           asp-route-sortorder="@(Model.SortViewModel.Current)"
+           class="glyphicon glyphicon-chevron-left">
+            Previous
+        </a>
+    }
+
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           asp-route-name="@(Model.FilterViewModel.SelectedCategory)"
+           asp-route-sortorder="@(Model.SortViewModel.Current)"
+           class="glyphicon glyphicon-chevron-right">
+            Next
+        </a>
+    }
+
+</div>
+
+
+
+<script>
+    $(".select option").each(function () {
+        $(this).siblings('[value="' + this.value + '"]').remove();
+    });
+</script>

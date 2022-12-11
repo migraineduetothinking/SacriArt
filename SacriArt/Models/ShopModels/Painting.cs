@@ -1,10 +1,11 @@
 ﻿
+using SacriArt.Data;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SacriArt.Models.ShopModels
 {
-    public class Painting 
+    public class Painting //: IEntityBase
     { 
 
         [Key]
