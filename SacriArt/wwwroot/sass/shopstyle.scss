@@ -81,10 +81,12 @@ body {
 
 
 .wrapper {
+	
 	min-height: 100%;
 	overflow: hidden;
 	display: flex;
-	flex-direction:column;
+	flex-direction: column;
+
 	background-color: var(--back_main_color);
 }
 
@@ -649,11 +651,13 @@ tbody {
 }
 
 .authorization_panel {
-	max-height: 500px;
+	max-height: 600px;
 	min-height: 250px;
+
 	margin: 0px auto;
 	margin-top: 210px;
-	margin-bottom: 110px;
+	margin-bottom: 230px;
+
 	max-width: 1240px;
 	text-align: center;
 }

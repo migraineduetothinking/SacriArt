@@ -20,13 +20,13 @@
         </p>
         <p>
             @Html.LabelFor(m => m.ExhibitionTitle, "ExhibitionTitle")
-            <select class="select option" asp-for="ExhibitionTitle.Name" asp-items="ViewBag.ExhibitionTitles">
+            <select class="select option" asp-for="ExhibitionTitle.Id" asp-items="ViewBag.ExhibitionTitles">
                 
             </select>
         </p>
         <p>
             @Html.LabelFor(m => m.Author, "Author")
-            <select class="select option" asp-for="Author.FullName" asp-items="ViewBag.Authors"></select>
+            <select class="select option" asp-for="Author.Id" asp-items="ViewBag.Authors"></select>
         </p>
         <p>
             @Html.LabelFor(m => m.Size, "Size")
@@ -34,7 +34,7 @@
         </p>
         <p>
             @Html.LabelFor(m => m.Style, "Style")
-            <select class="select option" asp-for="Style.Name" asp-items="ViewBag.Styles"></select>
+            <select class="select option" asp-for="Style.Id" asp-items="ViewBag.Styles"></select>
 
         </p>
         <p>

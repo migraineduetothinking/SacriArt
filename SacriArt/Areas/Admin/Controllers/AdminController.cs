@@ -14,7 +14,7 @@ namespace SacriArt.Areas.Admin.Controllers
 
 
     [Area("Admin")]
-    public class AdminController : Controller
+    public class UserController : Controller
     {
 
         AppDbContext db;
@@ -23,7 +23,7 @@ namespace SacriArt.Areas.Admin.Controllers
         IWebHostEnvironment _appEnvironment;
 
         
-        public AdminController(AppDbContext context, IWebHostEnvironment appEnvironment)
+        public UserController(AppDbContext context, IWebHostEnvironment appEnvironment)
         {
 
             db = context;

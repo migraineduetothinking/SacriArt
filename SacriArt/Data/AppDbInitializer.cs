@@ -443,7 +443,7 @@ namespace SacriArt.Data
                 }
 
 
-                // AppUsers
+                //AppUsers
                 //if (!await roleManager.RoleExistsAsync(UserRoles.User))
                 //    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
@@ -454,6 +454,7 @@ namespace SacriArt.Data
                 //{
                 //    var newAppUser = new IdentityUser()
                 //    {
+                //        Id = "3",
                 //        UserName = "user",
                 //        NormalizedUserName = "User",
                 //        Email = appUserEmail,

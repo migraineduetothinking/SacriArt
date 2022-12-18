@@ -18,11 +18,14 @@
 
 			<div class="header">
 				<div class="header-container">
-						<a href="../sacriart.html" target="_blank" class="header_logo">
+						<a asp-controller="Shop" asp-action="Index"  class="header_logo">
 							SacriShop
 						</a>
 						<div class="acoount-elem">
 							<a asp-area="" asp-controller="Account" asp-action="Index" class="acoount_btn">Log in</a>
+						</div>
+						<div class="acoount-elem">
+							<a asp-area="User" asp-page="/Razor/SignUp" class="acoount_btn">Sign up</a>
 						</div>
 						
 				</div> 

@@ -32,6 +32,7 @@ namespace SacriArt
                 opts.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "sacriartAuth";
@@ -52,8 +53,22 @@ namespace SacriArt
             });
 
             builder.Services.AddControllersWithViews(x => {
-                x.Conventions.Add(new AreaAuthorization("Admin", "AdminArea"));
-            });
+				x.Conventions.Add(new AreaAuthorization("Admin", "AdminArea"));
+			});
+
+            //builder.Services.AddAuthorization(x =>
+            //{
+            //    x.AddPolicy("UserArea", policy => { policy.RequireRole("user"); });
+            //});
+
+            //builder.Services.AddControllersWithViews(x =>
+            //{
+            //    x.Conventions.Add(new AreaAuthorization("User", "UserArea"));
+            //});
+
+           
+
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
@@ -72,7 +87,7 @@ namespace SacriArt
             app.UseAuthentication();
             app.UseAuthorization();
 
-
+            
             app.MapControllerRoute(
                name: "Admin",
                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
@@ -81,10 +96,12 @@ namespace SacriArt
                 name: "default",
                 pattern: "{controller=Shop}/{action=Index}/{id?}");
 
+            app.MapRazorPages();
 
-            AppDbInitializer.Seed(app); 
 
+            AppDbInitializer.Seed(app);
             AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
+
 
             app.Run();
 

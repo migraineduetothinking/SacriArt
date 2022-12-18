@@ -7,7 +7,7 @@ using SacriArt.Models.ViewModels;
 
 namespace SacriArt.Controllers
 {
-    
+
     [Authorize]
     public class AccountController : Controller
     {
