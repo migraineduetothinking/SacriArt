@@ -587,7 +587,7 @@ tbody {
   margin-right: 10px;
 }
 
-.login_input, .password_input {
+.login_input, .password_input, .register_input {
   height: 35px;
   width: 290px;
   outline: 1px solid var(--auth_info_outline_color);
@@ -596,16 +596,16 @@ tbody {
   padding-left: 5px;
 }
 
-.login_input::placeholder, .password_input::placeholder {
+.login_input::placeholder, .password_input::placeholder, .register_input::placeholder {
   font-size: 16px;
 }
 
-.login_input:hover, .password_input:hover {
+.login_input:hover, .password_input:hover, .register_input:hover {
   outline: 2px solid var(--outline_signIn_btn_color);
   box-shadow: 0 0 5px var(--auth_box-shadow_color);
 }
 
-.login_input:focus, .password_input:focus {
+.login_input:focus, .password_input:focus, .register_input:focus {
   outline: 2px solid var(--auth_input_focus_color);
   box-shadow: 0 0 7px var(--auth_box-shadow_color);
 }

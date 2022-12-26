@@ -15,7 +15,7 @@ namespace SacriArt
             var builder = WebApplication.CreateBuilder(args);
 
 
-           // builder.Services.AddControllersWithViews();
+            //builder.Services.AddControllersWithViews();
 
             builder.Configuration.Bind("ConnectionStrings", new Config());
 
