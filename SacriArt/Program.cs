@@ -56,17 +56,17 @@ namespace SacriArt
 				x.Conventions.Add(new AreaAuthorization("Admin", "AdminArea"));
 			});
 
-            //builder.Services.AddAuthorization(x =>
-            //{
-            //    x.AddPolicy("UserArea", policy => { policy.RequireRole("user"); });
-            //});
+            builder.Services.AddAuthorization(x =>
+            {
+                x.AddPolicy("UserArea", policy => { policy.RequireRole("user"); });
+            });
 
             //builder.Services.AddControllersWithViews(x =>
             //{
             //    x.Conventions.Add(new AreaAuthorization("User", "UserArea"));
             //});
 
-           
+
 
             builder.Services.AddRazorPages();
 
@@ -91,6 +91,10 @@ namespace SacriArt
             app.MapControllerRoute(
                name: "Admin",
                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
+             name: "User",
+             pattern: "{area:exists}/{controller=User}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
