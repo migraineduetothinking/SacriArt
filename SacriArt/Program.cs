@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using SacriArt.Data;
 using SacriArt.Services;
 
@@ -70,6 +71,9 @@ namespace SacriArt
 
             builder.Services.AddRazorPages();
 
+            //adding OpenAPI (Swagger)
+            builder.Services.AddSwaggerGen();
+
             var app = builder.Build();
 
             if (!app.Environment.IsDevelopment())
@@ -87,7 +91,15 @@ namespace SacriArt
             app.UseAuthentication();
             app.UseAuthorization();
 
-            
+            //adding OpenAPI (Swagger)
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    
+                }
+            );
+
             app.MapControllerRoute(
                name: "Admin",
                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
