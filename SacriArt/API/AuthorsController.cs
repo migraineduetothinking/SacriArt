@@ -28,66 +28,66 @@ namespace SacriArt.API
         [HttpGet("{id}")]
         public async Task<ActionResult<Author>> Get(int id)
         {
-            Author? authors = await db.Authors.FirstOrDefaultAsync(x => x.Id == id);
-            if (authors == null)
+            Author? author = await db.Authors.FirstOrDefaultAsync(x => x.Id == id);
+            if (author == null)
                 return NotFound();
-            return new ObjectResult(authors);
+            return new ObjectResult(author);
         }
 
 
         [HttpGet("{FullName}")]
         public async Task<ActionResult<Author>> Get(string FullName)
         {
-            Author? authors = await db.Authors.FirstOrDefaultAsync(x => x.FullName == FullName);
-            if (authors == null)
+            Author? author = await db.Authors.FirstOrDefaultAsync(x => x.FullName == FullName);
+            if (author == null)
                 return NotFound();
-            return new ObjectResult(authors);
+            return new ObjectResult(author);
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<Author>> Post(Author authors)
+        public async Task<ActionResult<Author>> Post(Author author)
         {
-            if (authors == null)
+            if (author == null)
             {
                 return BadRequest();
             }
 
-            db.Authors.Add(authors);
+            db.Authors.Add(author);
             await db.SaveChangesAsync();
-            return Ok(authors);
+            return Ok(author);
         }
 
         
         [HttpPut]
-        public async Task<ActionResult<Author>> Put(Author authors)
+        public async Task<ActionResult<Author>> Put(Author author)
         {
-            if (authors == null)
+            if (author == null)
             {
                 return BadRequest();
             }
-            if (!db.Authors.Any(x => x.Id == authors.Id))
+            if (!db.Authors.Any(x => x.Id == author.Id))
             {
                 return NotFound();
             }
 
-            db.Update(authors);
+            db.Update(author);
             await db.SaveChangesAsync();
-            return Ok(authors);
+            return Ok(author);
         }
 
         
         [HttpDelete("{FullName}")]
         public async Task<ActionResult<Author>> Delete(string FullName)
         {
-            Author? authors = db.Authors.FirstOrDefault(x => x.FullName == FullName);
-            if (authors == null)
+            Author? author = db.Authors.FirstOrDefault(x => x.FullName == FullName);
+            if (author == null)
             {
                 return NotFound();
             }
-            db.Authors.Remove(authors);
+            db.Authors.Remove(author);
             await db.SaveChangesAsync();
-            return Ok(authors);
+            return Ok(author);
         }
     }
 }
